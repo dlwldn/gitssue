@@ -2,11 +2,15 @@ import React from 'react';
 import styled from 'styled-components';
 import { colors } from '../../styles/colors';
 import { NavLink, Link } from 'react-router-dom';
+import { BsGithub } from 'react-icons/bs';
 
 function Header() {
   return (
     <HeaderWrapper>
-      <Link to="/">Gitssue</Link>
+      <Link to="/">
+        <BsGithub />
+        <span>Gitssue</span>
+      </Link>
       <div>
         <NavLink
           to="/"
@@ -48,6 +52,14 @@ const HeaderWrapper = styled.header`
   align-items: center;
   font-weight: 700;
   font-size: 14px;
+  > a {
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    > span {
+      margin: 0 5px;
+    }
+  }
   > div {
     > a {
       margin-left: 15px;

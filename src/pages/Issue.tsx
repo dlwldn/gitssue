@@ -1,9 +1,14 @@
-import React from 'react'
+import React from 'react';
+import HeadInfo from '../components/Common/HeadInfo';
+import Content from '../components/Issue/Content';
 
 function Issue() {
   return (
-    <div>Issue</div>
-  )
+    <>
+      <HeadInfo title="Gitssue - 이슈" />
+      <Content />
+    </>
+  );
 }
 
-export default Issue
+export default Issue;
