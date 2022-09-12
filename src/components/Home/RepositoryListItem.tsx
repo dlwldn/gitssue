@@ -18,6 +18,7 @@ type Props = {
 
 function RepositoryListItem({
   repositoryItem: {
+    id,
     name,
     owner,
     description,
@@ -30,21 +31,18 @@ function RepositoryListItem({
   },
 }: Props) {
   const { login, avatar_url } = owner;
-  const storageRepoList: StorageRepositoryType[] = storage.get<
-    StorageRepositoryType[]
-  >(STORAGE_REPOSITORY_KEY, []);
+  const storageRepoList = storage.get<StorageRepositoryType[]>(
+    STORAGE_REPOSITORY_KEY,
+    []
+  );
   const [isIncludeStorage, setIsIncludeStorage] = useState<boolean>(
-    storageRepoList.some(
-      (repoItem) =>
-        repoItem.username === login && repoItem.repositoryName === name
-    )
+    storageRepoList.some((repoItem) => repoItem.id === id)
   );
 
   const handleToggleRepositoryButton = () => {
     if (isIncludeStorage) {
       const filterdRepoList = storageRepoList.filter(
-        ({ username, repositoryName }) =>
-          repositoryName !== name || username !== owner.login
+        (storageItem) => storageItem.id !== id
       );
 
       storage.set(STORAGE_REPOSITORY_KEY, filterdRepoList);
@@ -67,6 +65,7 @@ function RepositoryListItem({
     storage.set(STORAGE_REPOSITORY_KEY, [
       ...storageRepoList,
       {
+        id,
         username: owner.login,
         repositoryName: name,
       },

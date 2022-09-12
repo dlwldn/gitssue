@@ -1,20 +1,25 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { RepositoryPayload } from '../../lib/apis/github';
 import { STORAGE_REPOSITORY_KEY } from '../../lib/consts/storage';
 import { storage } from '../../lib/utils/storage';
 import RepositoryListItem from '../Home/RepositoryListItem';
 import ResultMessage from '../Common/ResultMessage';
 import { DEFAULT_STALE_TIME } from '../../lib/consts/query';
 import useGetRepositoryQuery from '../../hooks/queries/useGetRepositoryQuery';
+import { StorageRepositoryType } from '../../lib/types/storage';
+import Loading from '../Common/Loading';
+import EmptyDataWrapper from '../Common/EmptyDataWrapper';
 
 function Content() {
-  const [repositoryList, setRepositoryList] = useState<RepositoryPayload[]>(
+  const [repositoryList, setRepositoryList] = useState<StorageRepositoryType[]>(
     storage.get(STORAGE_REPOSITORY_KEY, [])
   );
-  const { data: repositoriesData } = useGetRepositoryQuery(repositoryList, {
-    staleTime: DEFAULT_STALE_TIME,
-  });
+  const { data: repositoriesData, isFetching } = useGetRepositoryQuery(
+    repositoryList,
+    {
+      staleTime: DEFAULT_STALE_TIME,
+    }
+  );
 
   const setStorage = () => {
     setRepositoryList(storage.get(STORAGE_REPOSITORY_KEY, []));
@@ -22,6 +27,11 @@ function Content() {
 
   return (
     <ContentWrapper>
+      {isFetching && (
+        <EmptyDataWrapper>
+          <Loading />
+        </EmptyDataWrapper>
+      )}
       {repositoriesData?.length === 0 && (
         <EmptyDataWrapper>
           <ResultMessage text="저장된 레포지토리가 없습니다." />
@@ -49,10 +59,4 @@ const ContentWrapper = styled.div`
   > div {
     margin-bottom: 10px;
   }
-`;
-const EmptyDataWrapper = styled.div`
-  height: calc(100vh - 120px);
-  display: flex;
-  justify-content: center;
-  align-items: center;
 `;
