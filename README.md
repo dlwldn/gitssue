@@ -19,7 +19,7 @@
 ```
 1. .env (루트 디렉토리에 생성 후 저장)
 
-REACT_APP_GIT_ACCESS_TOKEN = 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
+해당 키가 readme나 코드에 노출 될 경우 키가 자동 파기 되므로 이메일에 첨부하여 드렸습니다.
 ```
 
 ```
@@ -101,6 +101,7 @@ REACT_APP_GIT_ACCESS_TOKEN = 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
 src
  ┣ components
  ┃ ┣ Common
+ ┃ ┃ ┣ EmptyDataWrapper.tsx
  ┃ ┃ ┣ Header.tsx
  ┃ ┃ ┣ HeadInfo.tsx
  ┃ ┃ ┣ Input.tsx
