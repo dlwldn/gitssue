@@ -1,9 +1,12 @@
-import React from 'react'
+import React from 'react';
+import Content from '../components/Repo/Content';
 
 function Repo() {
   return (
-    <div>Repo</div>
-  )
+    <div>
+      <Content />
+    </div>
+  );
 }
 
-export default Repo
+export default Repo;
