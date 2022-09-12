@@ -1,12 +1,14 @@
-import React from 'react'
-import Content from '../components/Home/Content'
+import React from 'react';
+import HeadInfo from '../components/Common/HeadInfo';
+import Content from '../components/Home/Content';
 
 function Home() {
   return (
-    <div>
+    <>
+      <HeadInfo title="Gitssue - 홈" />
       <Content />
-    </div>
-  )
+    </>
+  );
 }
 
-export default Home
+export default Home;

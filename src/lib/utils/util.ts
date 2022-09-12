@@ -16,3 +16,21 @@ export const changeDate = (
 
   return result;
 };
+
+export const createPage = (
+  page: number,
+  limitPageCount: number,
+  totalPage: number
+) => {
+  const startPageNumber =
+    Math.ceil(page / limitPageCount) * limitPageCount - limitPageCount;
+  const pages = Array(limitPageCount)
+    .fill('')
+    .map((_, idx) => {
+      if (idx + 1 + startPageNumber > totalPage) return 0;
+      return idx + 1 + startPageNumber;
+    })
+    .filter((item) => item);
+
+  return pages;
+};
